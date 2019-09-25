@@ -1,4 +1,6 @@
-# caddy
+# caddy (Changed for my own needs. Best not to build on this.)
+
+## I'll be removing this repo when Caddy 2.0 is out.
 
 A [Docker](https://docker.com) image for [Caddy](https://caddyserver.com). This image includes [git](https://caddyserver.com/docs/http.git), [cors](https://caddyserver.com/docs/http.cors), [realip](https://caddyserver.com/docs/http.realip), [expires](https://caddyserver.com/docs/http.expires), [cache](https://caddyserver.com/docs/http.cache) and [cloudflare](https://caddyserver.com/docs/tls.dns.cloudflare) plugins.
 
