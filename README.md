@@ -17,10 +17,6 @@ This image is built from [source code](https://github.com/caddyserver/caddy). As
 
 Caddy may prompt to agree to [Let's Encrypt Subscriber Agreement](https://letsencrypt.org/documents/2017.11.15-LE-SA-v1.2.pdf). This is configurable with `ACME_AGREE` environment variable. Set it to true to agree. `ACME_AGREE=true`.
 
-### Telemetry Stats
-
-Starting from `v0.11.0`, [Telemetry stats](https://caddyserver.com/docs/telemetry) are submitted to Caddy by default. To use Caddy without telemetry, use the `:no-stats` or `:<version>-no-stats` tags. e.g. `:0.11.0-no-stats`, `:0.11.0-php-no-stats`.
-
 ## Getting Started
 
 ```sh
@@ -59,30 +55,6 @@ $ docker run -d \
 Above, we utilize the `CADDYPATH` environment variable to define a different location inside the container for
 certificates to be stored. This is probably the safest option as it ensures any future docker image changes don't interfere with your ability to save certificates!
 
-### PHP
-
-`:[<version>-]php` variant of this image bundles PHP-FPM alongside essential php extensions and [composer](https://getcomposer.org). e.g. `:php`, `:0.10.14-php`
-
-```sh
-$ docker run -d -p 2015:2015 abiosoft/caddy:php
-```
-
-Point your browser to `http://127.0.0.1:2015` and you will see a php info page.
-
-##### Local php source
-
-Replace `/path/to/php/src` with your php sources directory.
-
-```sh
-$ docker run -d -v /path/to/php/src:/srv -p 2015:2015 abiosoft/caddy:php
-```
-
-Point your browser to `http://127.0.0.1:2015`.
-
-##### Note
-
-Your `Caddyfile` must include the line `on startup php-fpm7`. For Caddy to be PID 1 in the container, php-fpm7 could not be started.
-
 ### Using git sources
 
 Caddy can serve sites from git repository using [git](https://caddyserver.com/docs/http.git) plugin.
@@ -114,19 +86,6 @@ docker build --build-arg \
 ```
 
 ## Usage
-
-#### Default Caddyfile
-
-The image contains a default Caddyfile.
-
-```
-0.0.0.0
-browse
-fastcgi / 127.0.0.1:9000 php # php variant only
-on startup php-fpm7 # php variant only
-```
-
-The last 2 lines are only present in the php variant.
 
 #### Paths in container
 
