@@ -14,7 +14,7 @@ RUN go get -v github.com/abiosoft/parent
 
 RUN VERSION=${version} PLUGINS=${plugins} ENABLE_TELEMETRY=${enable_telemetry} /bin/sh /usr/bin/builder.sh
 
-FROM alpine:3.10 FROM pre
+FROM alpine:3.10
 
 ARG version="1.0.3"
 LABEL caddy_version="$version"
@@ -33,7 +33,7 @@ RUN apk add --no-cache \
     tzdata
 
 # install caddy
-COPY --from=builder /install/caddy /usr/bin/caddy
+COPY --from=pre /install/caddy /usr/bin/caddy
 
 # validate install
 RUN /usr/bin/caddy -version
@@ -42,7 +42,7 @@ RUN /usr/bin/caddy -plugins
 WORKDIR /srv
 
 # install process wrapper
-COPY --from=builder /go/bin/parent /bin/parent
+COPY --from=pre /go/bin/parent /bin/parent
 
 ENTRYPOINT ["/bin/parent", "caddy"]
 CMD ["--conf", "/etc/Caddyfile", "--log", "stdout", "--agree=$ACME_AGREE"]
